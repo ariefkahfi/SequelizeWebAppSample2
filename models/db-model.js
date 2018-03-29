@@ -9,11 +9,14 @@ const sequelize = new Sequelize("s_orm_webapp2","arief","123",{
 
 class DatabaseModel { 
     constructor() {
-
+        this.defineAllTables();
+        this.doRelation();
     }
 
     syncAllTables(forceIt) {
-
+        return sequelize.sync({
+            force:forceIt
+        })
     }
     doRelation() {
         // seller - product 
@@ -25,11 +28,19 @@ class DatabaseModel {
         });
         // seller - product
 
-        
+        // product - market
+        this.Product.belongsToMany(this.Market,
+            {through : this.ProductMarket,foreignKey:"product_id"}
+        );
+        this.Market.belongsToMany(this.Product,{
+            through:this.ProductMarket,
+            foreignKey:"market_id"
+        })
+        // product - market
     }
     defineAllTables() {
         this.Seller = sequelize.define("seller",{
-            seller_Id: {
+            seller_id: {
                 type:Sequelize.STRING,
                 primaryKey:true
             },
