@@ -3,14 +3,6 @@ extends ../layout
 block main_content
     form(action="/seller", method="post")
         .form-group.row
-            label(for="seller_name",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Your Name
-            .col-12.col-sm-12.col-md-12.col-lg-9#seller_name
-                input(type="text", name="seller_name",class="form-control")
-        .form-group.row
-            label(for="seller_address",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Your Address
-            .col-12.col-sm-12.col-md-12.col-lg-9#seller_address
-                input(type="text", name="seller_address",class="form-control")
-        .form-group.row
             label(for="product_name",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Product Name
             .col-12.col-sm-12.col-md-12.col-lg-9#product_name
                 input(type="text", name="product_name",class="form-control")

@@ -1,24 +1,55 @@
+const authMiddleware = require("../middleware/auth-middleware")
+const SellerModel = require("../models/seller-model")
+const sellerModel = new SellerModel()
+
 class SellerRouter { 
     constructor() {
         this.router = require("express").Router();
         this.initAllRouters()
     }
     initAllRouters() {
-        this.router.get("/",(req,res)=>{ 
+        this.router.get("/",authMiddleware,(req,res)=>{ 
             res.render("seller/seller-form",{
                 titlePage: "Seller Page",
                 cardTitle: "Seller",
                 navbarTitle: "Seller Page"
             })
         })
-        this.router.post("/",(req,res)=>{ 
+        this.router.post("/",authMiddleware,(req,res)=>{ 
+            console.log(req.body);
             res.end("NOT IMPLEMENTED YET");
         })
-        this.router.get("/seller/login",(req,res)=>{ 
-
+        this.router.get("/register",(req,res)=>{ 
+            res.render("seller/seller-register",{ 
+                titlePage:"Register Seller",
+                cardTitle:"Register",
+                navbarTitle:"Register Seller",
+                seller_id : require("uniqid")()
+            })
         })
-        this.router.post("/seller/login",(req,res)=>{ 
-            
+        this.router.post("/register",(req,res)=>{
+            sellerModel.saveSeller({ 
+                seller_id: req.body.seller_id,
+                seller_name: req.body.seller_name,
+                seller_address: req.body.seller_address
+            }).then(()=>{
+                console.log("POST /register success register")
+                res.redirect("back");
+            }).catch(err=>{
+                console.error(err)
+                res.sendStatus(500)
+             })
+        })
+        this.router.get("/login",(req,res)=>{ 
+            res.render("seller/seller-login",{ 
+                titlePage: "Login as seller",
+                cardTitle: "Login",
+                navbarTitle: "Login as seller"
+            })
+        })
+        this.router.post("/login",(req,res)=>{ 
+            console.log(req.body);
+            res.end("NOT IMPLEMENTED YET");
         })
     }
 }

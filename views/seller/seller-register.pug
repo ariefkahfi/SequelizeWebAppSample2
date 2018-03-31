@@ -1,0 +1,19 @@
+extends ../layout
+
+block main_content
+    form(action="/seller/register", method="post")
+        .form-group.row
+            label(for="seller_id",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Seller ID
+            .col-12.col-sm-12.col-md-12.col-lg-9#seller_id
+                input(type="text",readonly="readonly",value=seller_id,name="seller_id",class="form-control")
+        .form-group.row
+            label(for="seller_name",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Seller Name
+            .col-12.col-sm-12.col-md-12.col-lg-9#seller_name
+                input(type="text",class="form-control",name="seller_name")
+        .form-group.row
+            label(for="seller_address",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Seller Address
+            .col-12.col-sm-12.col-md-12.col-lg-9#seller_address
+                input(type="text",class="form-control",name="seller_address")
+        .form-group.row
+            .col-12
+                button(class="btn btn-primary w-100",value="Submit data") Submit Data

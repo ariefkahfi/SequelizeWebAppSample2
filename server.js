@@ -1,7 +1,12 @@
 const express = require("express");
 const path = require("path");
-const bodyParser = require("body-parser");
+const session = require("express-session");
 const app = express();
+const authMiddleware = require("./middleware/auth-middleware")
+
+app.use(session({
+    secret:require("uniqid")()
+}))
 
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","pug");
@@ -13,11 +18,12 @@ const marketRouter = new MarketRouter();
 const sellerRouter = new SellerRouter();
 
 
-app.use(bodyParser({
+app.use(express.urlencoded({
     extended:true
-}))
+}));
+
 app.use("/seller",sellerRouter.router);
-app.use("/market",marketRouter.router);
+app.use("/market",authMiddleware,marketRouter.router);
 
 app.get("/",(req,res)=>{ 
     res.render("index",{ 
