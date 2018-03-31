@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize("s_orm_webapp2","arief","123",{
+const sequelize = new Sequelize("s_orm_webapp2","arief","arief",{
     dialect:"mysql",
     operatorsAliases:false
 });
