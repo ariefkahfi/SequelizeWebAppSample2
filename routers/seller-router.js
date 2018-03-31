@@ -14,6 +14,12 @@ class SellerRouter {
         this.router.post("/",(req,res)=>{ 
             res.end("NOT IMPLEMENTED YET");
         })
+        this.router.get("/seller/login",(req,res)=>{ 
+
+        })
+        this.router.post("/seller/login",(req,res)=>{ 
+            
+        })
     }
 }
 

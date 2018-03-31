@@ -12,7 +12,17 @@ class MarketModel {
     getAll() {
         return dbModel.Market.findAll()
     }
-    
+    async removeProductFromMarket(product_id,market_id) {
+        let getMarket = await this.getOneById(market_id)
+        let getProduct = await dbModel.Product.findById(product_id)
+        
+        return getMarket.removeProduct(getProduct)
+    }
+    async addProductToMarket(product_id,market_id) {
+        let getProduct = await dbModel.Product.findById(product_id)
+        let getMarket = await this.getOneById(market_id)
+        return getMarket.addProduct(getProduct)
+    }
 }
 
 module.exports = MarketModel

@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const bodyParser = require("body-parser");
 const app = express();
 
 app.set("views",path.join(__dirname,"views"));
@@ -11,6 +12,10 @@ const MarketRouter = require("./routers/market-router");
 const marketRouter = new MarketRouter();
 const sellerRouter = new SellerRouter();
 
+
+app.use(bodyParser({
+    extended:true
+}))
 app.use("/seller",sellerRouter.router);
 app.use("/market",marketRouter.router);
 
