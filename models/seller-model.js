@@ -11,7 +11,7 @@ class SellerModel {
         let savedProduct = await dbModel.Product.create(product);
         return savedSeller.addProduct(savedProduct)
     }
-    aysnc removeProductFromSeller(seller_id,product_id) {
+    async removeProductFromSeller(seller_id,product_id) {
         
     }
     async addNewProductToSeller(seller_id,newProduct) {
