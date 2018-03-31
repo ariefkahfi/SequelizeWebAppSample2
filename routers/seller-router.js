@@ -1,15 +1,18 @@
-const router = require("express").Router();
-
 class SellerRouter { 
     constructor() {
+        this.router = require("express").Router();
         this.initAllRouters()
     }
     initAllRouters() {
-        router.get("/",(req,res)=>{ 
-
+        this.router.get("/",(req,res)=>{ 
+            res.render("seller/seller-form",{
+                titlePage: "Seller Page",
+                cardTitle: "Seller",
+                navbarTitle: "Seller Page"
+            })
         })
-        router.post("/",(req,res)=>{ 
-
+        this.router.post("/",(req,res)=>{ 
+            res.end("NOT IMPLEMENTED YET");
         })
     }
 }

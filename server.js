@@ -8,8 +8,14 @@ app.set("view engine","pug");
 const SellerRouter = require("./routers/seller-router");
 const sellerRouter = new SellerRouter();
 
-app.use("/seller",sellerRouter);
-
+app.use("/seller",sellerRouter.router);
+app.get("/",(req,res)=>{ 
+    res.render("index",{ 
+        titlePage:"Index Page",
+        cardTitle: "Index",
+        navbarTitle: "Index Page"
+    })
+})
 
 
 app.listen(9600,()=>{ 
