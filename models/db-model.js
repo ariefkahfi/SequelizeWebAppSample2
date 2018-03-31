@@ -69,6 +69,10 @@ class DatabaseModel {
             product_price: {
                 type:Sequelize.FLOAT,
                 allowNull:false
+            },
+            product_stock: { 
+                type:Sequelize.INTEGER,
+                allowNull:false
             }
         },{ 
             timestamps:false,

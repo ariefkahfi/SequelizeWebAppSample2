@@ -11,8 +11,8 @@ html(lang="en")
             h3(class="navbar-brand")= navbarTitle
             div(class="nav")
                 a(href="/seller",class="nav-item text-primary mx-2") Seller Page
-                a(href="/",class="nav-item text-primary mx-2") Item Link
-                a(href="/",class="nav-item text-primary mx-2") Item Link
+                a(href="/",class="nav-item text-primary mx-2") Home Page
+                a(href="/market",class="nav-item text-primary mx-2") Market Page
 
         .container-fluid.py-2
             .row
@@ -20,9 +20,12 @@ html(lang="en")
                     .card
                         h3(class="card-header bg-primary text-light")= cardTitle
                         .list-group.list-group-flush
-                            span(class="list-group-item") Item one
-                            span(class="list-group-item") Item two
-                            span(class="list-group-item") Item three
+                            span(class="list-group-item")
+                                 a(href="/seller",class="text-primary") Seller Page
+                            span(class="list-group-item")
+                                 a(href="/",class="text-primary") Home Page
+                            span(class="list-group-item")
+                                 a(href="/market",class="text-primary") Market Page
                 .col-12.col-sm-12.col-md-12.col-lg-9
                     .card
                         h3(class="card-header bg-primary text-light")= cardTitle
