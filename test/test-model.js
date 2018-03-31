@@ -9,21 +9,48 @@ const productModel = new ProductModel();
 
 const uniqId = require("uniqid");
 
-describe("SellerModel",()=>{ 
-    describe("#save",()=>{ 
-        it("must save seller",(done)=>{ 
-            sellerModel.saveSeller({
-                seller_id: uniqId(),
-                seller_name: "aa1",
-                seller_address: "address_aa1"
-            }).then(()=>{
-                done()
-            }).catch(err=>{ 
-                done(err)
-            })
-        })
-    })
 
+describe("ManyToMany",()=>{ 
+    
+})
+
+describe("SellerModel",()=>{ 
+    // describe("#save",()=>{ 
+    //     it("must save seller",(done)=>{ 
+    //         sellerModel.saveSeller({
+    //             seller_id: uniqId(),
+    //             seller_name: "aa1",
+    //             seller_address: "address_aa1"
+    //         }).then(()=>{
+    //             done()
+    //         }).catch(err=>{ 
+    //             done(err)
+    //         })
+    //     })
+    // })
+
+    // describe("#removeProductFromSeller",()=>{ 
+    //     it("must remove a product from existing seller",(done)=>{ 
+    //         let sellerId = uniqId();
+    //         let productId = uniqId(); 
+    //         sellerModel.saveSellerAndSaveProduct({
+    //             seller_id: sellerId,
+    //             seller_name: "aa10",
+    //             seller_address: "address_aa10",
+    //         },{
+    //             product_id: productId,
+    //             product_name: "product_aa10",
+    //             product_price: 8900,
+    //             product_stock: 150
+    //         }).then(()=>{
+    //             return sellerModel.removeProductFromSeller(sellerId,productId)
+    //         }).then(()=>{ 
+    //             done()
+    //         }).catch(err=>{ 
+    //             done(err)
+    //         })
+    //     })
+    // })
 
 
     // describe("#saveSellerAndSaveProduct",()=>{ 
@@ -66,5 +93,5 @@ describe("SellerModel",()=>{
     //     })
     // })
 
-    
+
 })

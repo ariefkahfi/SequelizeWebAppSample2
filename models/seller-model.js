@@ -12,14 +12,17 @@ class SellerModel {
         return savedSeller.addProduct(savedProduct)
     }
     async removeProductFromSeller(seller_id,product_id) {
-        
+        let getProduct = await dbModel.Product.findById(product_id)
+        let getSeller = await this.getSellerById(seller_id)
+        await getSeller.removeProduct(getProduct)
+        return getProduct.destroy()
     }
     async addNewProductToSeller(seller_id,newProduct) {
         let getSeller = await this.getSellerById(seller_id)
         let saveNewProduct = await dbModel.Product.create(newProduct)
         return getSeller.addProduct(saveNewProduct)
     }
-
+    
     getSellerById(seller_id) { 
         return dbModel.Seller.findById(seller_id)
     }
