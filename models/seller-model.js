@@ -23,6 +23,13 @@ class SellerModel {
         return getSeller.addProduct(saveNewProduct)
     }
     
+    getSellerByIdAndName(seller_id,s_name) {
+        return dbModel.Seller.findById(seller_id,{ 
+            where: {
+                seller_name: s_name
+            }
+        })
+    }
     getSellerById(seller_id) { 
         return dbModel.Seller.findById(seller_id)
     }
