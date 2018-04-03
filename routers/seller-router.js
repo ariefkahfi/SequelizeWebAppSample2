@@ -17,7 +17,18 @@ class SellerRouter {
         })
         this.router.post("/",authMiddleware,(req,res)=>{ 
             console.log(req.body);
-            res.end("NOT IMPLEMENTED YET");
+            sellerModel.addNewProductToSeller(req.session.user_id,{ 
+                product_id : require("uniqid")(),
+                product_name: req.body.product_name,
+                product_price : req.body.product_price,
+                product_stock : req.body.product_stock
+            }).then(()=>{
+                console.log("POST /seller addNewProductToSeller DONE !!!")
+                res.redirect("/seller")
+            }).catch(err=>{ 
+                console.error(err)
+                res.sendStatus(500)
+            })
         })
         this.router.get("/register",(req,res)=>{ 
             res.render("seller/seller-register",{ 
@@ -56,7 +67,9 @@ class SellerRouter {
             console.log(req.body);
             sellerModel.getSellerByIdAndName(req.body.seller_id,req.body.seller_name)
                 .then(seller=>{ 
+                    req.session.user_id = seller.seller_id
                     req.session.username = seller.seller_name 
+                    console.log("CHECK VAL SESSION_USER_ID : " , req.session.user_id)
                     console.log("CHECK VAL SESSION_USERNAME : " , req.session.username)
                     res.redirect(".")
                 }).catch(err=>{ 
