@@ -3,7 +3,7 @@ const sellerModel = new SellerModel()
 const assert = require("assert")
 
 
-describe.only("loginTest",()=>{ 
+describe("loginTest",()=>{ 
     it("must be valid seller", (done)=>{ 
        sellerModel.getSellerByIdAndName("2sej73jffldf1t","Seller001")
         .then((gSeller)=>{

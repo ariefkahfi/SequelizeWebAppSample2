@@ -105,7 +105,22 @@ describe("MarketModel test",()=>{
 
 
 
-describe("SellerModel",()=>{ 
+describe.only("SellerModel",()=>{ 
+    describe("getProductsFromSeller",()=>{ 
+        it("must return all products from certain seller",(done)=>{ 
+            sellerModel
+                .getSellerById("2sej73jffldf1t")
+                .then(seller=>{ 
+                    return seller.getProducts()
+                }).then(products=>{ 
+                    console.log(JSON.stringify(products))
+                    done()
+                }).catch(err=>{ 
+                    console.error(err)
+                    done(err)
+                })
+        })
+    })
     // describe("#save",()=>{ 
     //     it("must save seller",(done)=>{ 
     //         sellerModel.saveSeller({
