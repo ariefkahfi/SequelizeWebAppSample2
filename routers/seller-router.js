@@ -47,9 +47,22 @@ class SellerRouter {
                 navbarTitle: "Login as seller"
             })
         })
+        this.router.get("/logout",(req,res)=>{ 
+            req.session.destroy(err=>{ 
+                res.redirect("/seller/login")
+            })
+        })
         this.router.post("/login",(req,res)=>{ 
             console.log(req.body);
-            res.end("NOT IMPLEMENTED YET");
+            sellerModel.getSellerByIdAndName(req.body.seller_id,req.body.seller_name)
+                .then(seller=>{ 
+                    req.session.username = seller.seller_name 
+                    console.log("CHECK VAL SESSION_USERNAME : " , req.session.username)
+                    res.redirect(".")
+                }).catch(err=>{ 
+                    console.error(err)
+                    res.sendStatus(500)
+                })
         })
     }
 }
