@@ -7,12 +7,17 @@ const sequelize = new Sequelize("s_orm_webapp2","arief","arief",{
 // seller (1 to n) product
 // product (n to n) store
 
+
+
 class DatabaseModel { 
     constructor() {
         this.defineAllTables();
         this.doRelation();
     }
 
+    getSequelize() { 
+        return sequelize
+    }
     syncAllTables(forceIt) {
         return sequelize.sync({
             force:forceIt

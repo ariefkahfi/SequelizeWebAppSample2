@@ -102,10 +102,13 @@ describe("MarketModel test",()=>{
 
 })
 
+// select * from product p 
+// inner join seller s  on p.seller_id = s.seller_id 
+// inner join  product_market pm on pm.product_id = p.product_id  
+// inner join  market m  on m.market_id = pm.market_id where s.seller_id = '...'
 
 
-
-describe.only("SellerModel",()=>{ 
+describe("SellerModel",()=>{ 
     describe("getProductsFromSeller",()=>{ 
         it("must return all products from certain seller",(done)=>{ 
             sellerModel
@@ -118,6 +121,23 @@ describe.only("SellerModel",()=>{
                 }).catch(err=>{ 
                     console.error(err)
                     done(err)
+                })
+        })
+    })
+    describe.only("getMarket",()=>{ 
+        it("must return market from certain seller",(done)=>{ 
+            dbModel
+                .getSequelize()
+                .query(`
+                    select * from product p 
+                    inner join  seller s  on p.seller_id = s.seller_id 
+                    inner join  product_market pm on pm.product_id = p.product_id  
+                    inner join  market m  on m.market_id = pm.market_id where s.seller_id = '2sej73jffldf1t'
+                `).spread((products,created)=>{ 
+                    products.forEach(val=>{ 
+                        console.log(val.market_name)
+                    })
+                    done()
                 })
         })
     })

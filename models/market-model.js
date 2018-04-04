@@ -23,6 +23,11 @@ class MarketModel {
         let getMarket = await this.getOneById(market_id)
         return getMarket.addProduct(getProduct)
     }
+    async saveMarketAndAddProductToMarket(market,product_id) {
+        let savMarket = await this.saveMarket(market)
+        let getProduct = await dbModel.Product.findById(product_id)
+        return savMarket.addProduct(getProduct)
+    }
 }
 
 module.exports = MarketModel
