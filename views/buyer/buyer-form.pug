@@ -1,0 +1,18 @@
+extends ../layout
+
+
+block main_content
+    form(action="/buyer", method="post")
+        .form-group.row
+            label(for="howMuchStock",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") How much stock do you buy ?
+            .col-12.col-sm-12.col-md-12.col-lg-9#howMuchStock
+                input(type="number", name="howMuchStock",class="form-control")
+        .form-group.row
+            label(for="product_id",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Choose a product 
+            .col-12.col-sm-12.col-md-12.col-lg-9#product_id
+                select(name="product_id",class="form-control")
+                    each p in listProduct
+                        option(value=p.product_id) #{p.product_name} || #{p.product_stock}
+        .form-group.row
+            .col-12
+                button(class="w-100 btn btn-primary",value="Purchase") Purchase a product

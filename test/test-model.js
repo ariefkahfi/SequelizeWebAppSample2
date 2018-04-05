@@ -108,7 +108,40 @@ describe("MarketModel test",()=>{
 // inner join  market m  on m.market_id = pm.market_id where s.seller_id = '...'
 
 
+describe.only("Buyer test",()=>{ 
+    describe("buy a product ",()=>{ 
+        it("must reduce a stock",(done)=>{ 
+            productModel
+                .reduceStockById("2se2fxjfm0q5va",5)
+                .then(()=>{
+                    done()   
+                })
+                .catch(err=>{ 
+                    console.error(err)
+                    done(err)
+                })
+        })
+    })
+})
+
 describe("SellerModel",()=>{ 
+    describe("get products and market from certain seller",function(){
+        it("must return all products and markets",async function(){ 
+            let result = 
+                await sellerModel.getMarketsAndGetProductsBySellerId("2se2edjfm0o13n")
+
+            result.products.forEach(val=>{ 
+                console.log(val.get({ 
+                    plain:true
+                }))
+            })
+            result.markets.forEach(val=>{ 
+                console.log(val.get({ 
+                    plain:true
+                }))
+            })
+        })
+     })
     describe("getProductsFromSeller",()=>{ 
         it("must return all products from certain seller",(done)=>{ 
             sellerModel
@@ -124,7 +157,7 @@ describe("SellerModel",()=>{
                 })
         })
     })
-    describe.only("getMarket",()=>{ 
+    describe("getMarket",()=>{ 
         it("must return market from certain seller",(done)=>{ 
             dbModel
                 .getSequelize()

@@ -11,28 +11,24 @@ block main_content
             .col-12.col-sm-12.col-md-12.col-lg-9#market_contact
                 input(type="text",name="market_contact",class="form-control")
         .form-group.row
-            label(for="product_id",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Submit product to market
-            .col-12.col-sm-12.col-md-12.col-lg-9#product_id
-                select(name="product_id",class="form-control")
-                    each p in listProducts
-                        option(value=p.product_id)= p.product_name
-        .form-group.row
             .col-12
                 button(class="btn btn-primary w-100",value="Submit Data") Submit Data
     
     
-        h2.text-light.bg-primary Add new product to my market
-        form(action="/market/publish", method="post")
-            .form-group.row
-                label(for="market_id",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Choose Market
-                .col-12.col-sm-12.col-md-12.col-lg-9#market_id
-                    select(name="market_id",class="form-control")
-
-            .form-group.row
-                label(for="product_id",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Choose a product to publish
-                .col-12.col-sm-12.col-md-12.col-lg-9#product_id
-                    select(name="product_id",class="form-control")
-                          
-            .form-group.row
-                .col-12
-                    button(class="btn btn-primary",value="Publish to market") Publish to market
+    h2.text-light.bg-primary Add new product to my market
+    form(action="/market/publish", method="post")
+        .form-group.row
+            label(for="market_id",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Choose Market
+            .col-12.col-sm-12.col-md-12.col-lg-9#market_id
+                select(name="market_id",class="form-control")
+                    each market in listMarkets
+                        option(value=market.market_id) #{market.market_name} || #{market.market_contact}
+        .form-group.row
+            label(for="product_id",class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label") Choose a product to publish
+            .col-12.col-sm-12.col-md-12.col-lg-9#product_id
+                select(name="product_id",class="form-control")
+                    each product in listProducts
+                        option(value=product.product_id) #{product.product_name} || #{product.product_stock}
+        .form-group.row
+            .col-12
+                button(class="btn btn-primary",value="Publish to market") Publish to market

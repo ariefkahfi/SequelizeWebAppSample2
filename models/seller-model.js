@@ -22,7 +22,27 @@ class SellerModel {
         let saveNewProduct = await dbModel.Product.create(newProduct)
         return getSeller.addProduct(saveNewProduct)
     }
-    
+    async saveMarketAndSetSeller(seller_id,newMarket) {
+        let gSeller = await this.getSellerById(seller_id)
+        let persistMarket = await dbModel.Market.create(newMarket)
+        return gSeller.addMarket(persistMarket)
+    }
+    async getMarketsAndGetProductsBySellerId(seller_id) { 
+        let getSeller = await this.getSellerById(seller_id)
+        let getProducts = await getSeller.getProducts()
+        let getMarkets = await getSeller.getMarkets()
+
+        // let jsonProducts = JSON.stringify(getProducts)
+        // let jsonMarkets  = JSON.stringify(getMarkets)
+
+        // let parsedProducts = JSON.parse(jsonProducts)
+        // let parsedMarkets = JSON.parse(jsonMarkets)
+
+        return { 
+            products: getProducts,
+            markets: getMarkets
+        }
+    } 
     getSellerByIdAndName(seller_id,s_name) {
         return dbModel.Seller.findById(seller_id,{ 
             where: {

@@ -13,7 +13,10 @@ app.set("view engine","pug");
 
 const SellerRouter = require("./routers/seller-router");
 const MarketRouter = require("./routers/market-router");
+const BuyerRouter = require("./routers/buyer-router")
 
+
+const buyerRouter = new BuyerRouter()
 const marketRouter = new MarketRouter();
 const sellerRouter = new SellerRouter();
 
@@ -23,6 +26,7 @@ app.use(express.urlencoded({
 }));
 
 app.use("/seller",sellerRouter.router);
+app.use("/buyer",buyerRouter.router)
 app.use("/market",authMiddleware,marketRouter.router);
 
 app.get("/",(req,res)=>{ 

@@ -12,35 +12,35 @@ class MarketRouter {
     }
     initAllRouters() {
         this.router.get("/",(req,res)=>{ 
-            sellerModel.getSellerById(req.session.user_id)
-                .then(seller=>{ 
-                   return seller.getProducts()
-                }).then(products=>{ 
+            sellerModel
+                .getMarketsAndGetProductsBySellerId(req.session.user_id)
+                .then(result=>{ 
                     res.render("market/market-form",{ 
                         titlePage:"Market Page",
                         cardTitle: "New Market",
                         navbarTitle: "Market Page",
-                        listProducts: products
-                    })
-                }).catch(err=>{ 
+                        listProducts: result.products,
+                        listMarkets: result.markets
+                    })        
+                })
+                .catch(err=>{ 
                     console.error(err)
                     res.sendStatus(500)
                 })
-            
         })
         this.router.post("/",(req,res)=>{
             console.log(req.body)
-            marketModel.saveMarketAndAddProductToMarket({
-                market_name: req.body.market_name,
+            sellerModel.saveMarketAndSetSeller(req.session.user_id,{ 
+                market_name:req.body.market_name,
                 market_contact: req.body.market_contact
-            },req.body.product_id)
-                .then(()=>{
-                    console.log("/market POST done")
-                    res.redirect("back")
-                }).catch(err=>{ 
-                    console.error(err)
-                    res.sendStatus(500)
-                })
+            }).then(()=>{
+                console.log("/market post DONE")
+                res.redirect("back")
+            })
+            .catch(err=>{ 
+                console.error(err)
+                res.sendStatus(500)
+            })
          })
 
          this.router.post("/publish",(req,res)=>{ 

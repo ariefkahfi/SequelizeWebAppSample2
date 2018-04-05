@@ -42,6 +42,15 @@ class DatabaseModel {
             foreignKey:"market_id"
         })
         // product - market
+
+        // seller - market
+        this.Seller.hasMany(this.Market, {
+            foreignKey:"seller_id"
+        })
+        this.Market.belongsTo(this.Seller, { 
+            foreignKey: "seller_id"
+        })
+        // seller - market
     }
     defineAllTables() {
         this.Seller = sequelize.define("seller",{

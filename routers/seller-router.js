@@ -63,12 +63,6 @@ class SellerRouter {
                 res.redirect("/seller/login")
             })
         })
-        this.router.get("/sell",(req,res)=>{ 
-            
-        })
-        this.router.post("/sell",(req,res)=> {
-
-        })
         this.router.post("/login",(req,res)=>{ 
             console.log(req.body);
             sellerModel.getSellerByIdAndName(req.body.seller_id,req.body.seller_name)
